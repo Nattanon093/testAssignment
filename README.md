@@ -1,4 +1,4 @@
-## Minimal [(Free version)]
+## Minimal
 
 ## Getting started
 

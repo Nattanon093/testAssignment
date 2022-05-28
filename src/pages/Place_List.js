@@ -1,5 +1,7 @@
 import React from 'react';
 import { filter } from 'lodash';
+import { Navigate } from 'react-router-dom';
+
 // material
 import { styled } from '@mui/material/styles';
 import {
@@ -83,11 +85,14 @@ export default function PlaceList() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [placeName, setPlaceName] = React.useState('');
+  // const [placeId, setPlaceId] = React.useState('');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
   const latestPostLarge = data === 0;
   const latestPost = data === 1 || data === 2;
 
+  console.log('PlaceList.js: data: ', data);
+  
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -105,6 +110,11 @@ export default function PlaceList() {
   const filteredPlaceName = applySortFilter(data, getComparator(order, orderBy), placeName);
 
   const isUserNotFound = filteredPlaceName.length === 0;
+
+  const placeByIdpath = (id) => {
+    window.location.href = `/ics/placeById/${id}`;
+  }
+
   return (
     <Page title="Place List">
       <Container>
@@ -132,11 +142,16 @@ export default function PlaceList() {
                   // height:200
                 }}
               >
-                <Card sx={{ position: 'relative' }} >
+                <Card sx={{ position: 'relative', padding: '10px' }}
+                >
                   <CardHeader
                     sx={{ padding: '10px' }}
                     avatar={
-                      <Avatar aria-label="recipe" variant="rounded" src={place.profile_image_url} />
+                      <Avatar aria-label="recipe" variant="rounded" src={place.profile_image_url}
+                        onClick={() => {
+                          placeByIdpath(place.id);
+                        }}
+                      />
                     }
                     title={place.name}
                     subheader={
@@ -152,7 +167,7 @@ export default function PlaceList() {
                       </Stack>
                     }
                   />
-                  <ImageList sx={{ ...componentStyle, borderRadius: '20px', width: '100%', height: '100%', }} gap={0} cols={3} rowHeight={164}>
+                  <ImageList sx={{ ...componentStyle, borderRadius: '20px', width: '100%', height: '100%' }} gap={0} cols={3} rowHeight={164}>
                     {place.images.map((item, index) => (
                       <ImageListItem key={index}>
                         <img
@@ -167,46 +182,11 @@ export default function PlaceList() {
               </Grid>
             ))
             :
-            data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item, index) => (
-              <Grid key={index} item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}
-                sx={{
-                  // height:200
-                }}
-              >
-                <Card sx={{ position: 'relative' }} >
-                  <CardHeader
-                    sx={{ padding: '10px' }}
-                    avatar={
-                      <Avatar aria-label="recipe" variant="rounded" src={item.profile_image_url} />
-                    }
-                    title={item.name}
-                    subheader={
-                      <Stack direction="row" alignItems="center" justifyContent="space-between">
-                        <Typography variant="body2" color="textSecondary" sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Iconify icon={'akar-icons:calendar'} width={20} height={20} sx={{ mr: 1 }} />
-                          <span>{`${item.operation_time[0].time_open} - ${item.operation_time[0].time_close}`}</span>
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Iconify icon={'emojione:star'} width={20} height={20} sx={{ mr: 1 }} />
-                          <span>{`${item.rating}`}</span>
-                        </Typography>
-                      </Stack>
-                    }
-                  />
-                  <ImageList sx={{ ...componentStyle, borderRadius: '20px', width: '100%', height: '100%', }} gap={0} cols={3} rowHeight={164}>
-                    {item.images.map((item, index) => (
-                      <ImageListItem key={index}>
-                        <img
-                          src={item}
-                          alt={item}
-                          loading="lazy"
-                        />
-                      </ImageListItem>
-                    ))}
-                  </ImageList>
-                </Card>
-              </Grid>
-            ))
+            <Grid item xs={12} sm={12} md={12}>
+              <Typography variant="h5" gutterBottom>
+                {isUserNotFound ? 'No place found' : 'Loading...'}
+              </Typography>
+            </Grid>
           }
         </Grid>
         <Box sx={{ mt: 3, display: 'flex', direction: 'row', justifyContent: 'center' }}>

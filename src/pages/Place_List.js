@@ -33,16 +33,12 @@ import DATABASE from '../json/example_data.json';
 
 // ----------------------------------------------------------------------
 
-const SORT_OPTIONS = [
-  { value: 'latest', label: 'Latest' },
-  { value: 'popular', label: 'Popular' },
-  { value: 'oldest', label: 'Oldest' },
+const PLACE_OPTIONS = [
+  { value: 'restaurant', label: 'restaurant' },
+  { value: 'cafe', label: 'cafe' },
+  { value: 'bakery', label: 'bakery' },
 ];
 
-const CardMediaStyle = styled('div')({
-  position: 'relative',
-  paddingTop: 'calc(100% * 3 / 4)',
-});
 
 const componentStyle = {
   width: '5rem',
@@ -94,7 +90,6 @@ export default function PlaceList(props) {
   const navigate = useNavigate();
 
   const latestPostLarge = data === 0;
-  const latestPost = data === 1 || data === 2;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -114,10 +109,6 @@ export default function PlaceList(props) {
 
   const isUserNotFound = filteredPlaceName.length === 0;
 
-  // const placeByIdpath = () => {
-  //   return Navigate(`/ics/placeById/${id}`)
-  //   // window.location.href = `/ics/placeById/${id}`;
-  // }
   const placeByIdpath = (id) => {
     navigate(`/ics/placeById/${id}`, { state: { placeId: id } });
   }
@@ -125,12 +116,19 @@ export default function PlaceList(props) {
   return (
     <Page title="Place List">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" flexWrap="wrap" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Place List
           </Typography>
+          <Stack direction="row" alignItems="center" flexWrap="wrap">
+            <BlogPostsSort options={PLACE_OPTIONS}/>
+            <Typography gutterBottom variant="body1" component="h2" sx={{ ml: 3 }}>
+              |
+            </Typography>
             <BlogPostSearchs numSelected={selected.length} placeName={placeName} onFilterName={handleFilterByPlaceName} />
+          </Stack>
         </Stack>
+
         <Grid container spacing={3}
           sx={{
             display: 'flex',
@@ -215,6 +213,14 @@ export default function PlaceList(props) {
           </Stack>
         </Box>
       </Container >
+      <style jsx="true">{`
+    .css-18ljf71-MuiInputBase-root-MuiOutlinedInput-root {
+      border-radius: 30px;
+      width: 185px;
+      height: 40px;
+    }
+    `}
+      </style>
     </Page >
   );
 }

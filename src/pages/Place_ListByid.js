@@ -1,4 +1,4 @@
-/* eslint-disable arrow-body-style */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { filter } from 'lodash';
@@ -50,8 +50,6 @@ export default function PlaceListByid() {
   const onBack = () => {
     window.history.back();
   }
-
-  console.log('place:', place);
   return (
     <>
       {place && place.length > 0 &&
@@ -78,7 +76,7 @@ export default function PlaceListByid() {
               <Card sx={{ background: '#C4D3E9', maxWidth: '100%' }} >
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', p: 3 }}>
                   <div x={{ m: 1, width: '25ch' }} variant="outlined">
-                    <Card sx={{ maxWidth: 497, mt:1 }}>
+                    <Card sx={{ maxWidth: 497, mt: 1 }}>
                       <CardMedia
                         component="img"
                         height="270"
@@ -124,9 +122,8 @@ export default function PlaceListByid() {
                       </CardContent>
                     </Card>
                   </div>
-
                   <div x={{ m: 1, width: '25ch' }} variant="outlined">
-                    <Box sx={{ flexGrow: 1, p:1}}>
+                    <Box sx={{ flexGrow: 1, p: 1 }}>
                       <Card sx={{ padding: 2 }}>
                         <Typography gutterBottom variant="h5" component="div"> Image</Typography>
                         <ImageList

@@ -1,8 +1,10 @@
 ## Minimal
 
 # Git Clone Project
+
 Open commandline or Terminal
-[https://github.com/Nattanon093/testAssignment](https://github.com/Nattanon093/testAssignment)
+git clone [https://github.com/Nattanon093/testAssignment](https://github.com/Nattanon093/testAssignment)
+
 ## Getting started
 
 - Recommended `node js 14.x` and `npm 6+`

@@ -1,9 +1,8 @@
 import React from 'react';
 import { filter } from 'lodash';
-import { Navigate } from 'react-router-dom';
-
 // material
 import { styled } from '@mui/material/styles';
+import { Navigate, useNavigate } from 'react-router-dom'
 import {
   Box,
   Grid,
@@ -16,7 +15,9 @@ import {
   CardHeader,
   Avatar,
   ImageList,
-  ImageListItem
+  ImageListItem,
+  Link,
+  Skeleton
 } from '@mui/material';
 // components
 import Page from '../components/Page';
@@ -79,20 +80,22 @@ function applySortFilter(array, comparator, query) {
 
 // ----------------------------------------------------------------------
 
-export default function PlaceList() {
+export default function PlaceList(props) {
+  const { loading = false } = props;
   const [data, setData] = React.useState(DATABASE);
   const [selected, setSelected] = React.useState([]);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [placeName, setPlaceName] = React.useState('');
-  // const [placeId, setPlaceId] = React.useState('');
+  const [placeId, setPlaceId] = React.useState('');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
+
+  const navigate = useNavigate();
+
   const latestPostLarge = data === 0;
   const latestPost = data === 1 || data === 2;
 
-  console.log('PlaceList.js: data: ', data);
-  
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -111,8 +114,12 @@ export default function PlaceList() {
 
   const isUserNotFound = filteredPlaceName.length === 0;
 
+  // const placeByIdpath = () => {
+  //   return Navigate(`/ics/placeById/${id}`)
+  //   // window.location.href = `/ics/placeById/${id}`;
+  // }
   const placeByIdpath = (id) => {
-    window.location.href = `/ics/placeById/${id}`;
+    navigate(`/ics/placeById/${id}`, { state: { placeId: id } });
   }
 
   return (
@@ -143,14 +150,12 @@ export default function PlaceList() {
                 }}
               >
                 <Card sx={{ position: 'relative', padding: '10px' }}
+                  onClick={() => placeByIdpath(place.id)}
                 >
                   <CardHeader
                     sx={{ padding: '10px' }}
                     avatar={
                       <Avatar aria-label="recipe" variant="rounded" src={place.profile_image_url}
-                        onClick={() => {
-                          placeByIdpath(place.id);
-                        }}
                       />
                     }
                     title={place.name}

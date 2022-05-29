@@ -48,12 +48,8 @@ export default function Navbar({ onOpenSidebar }) {
         <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: '#fff', display: { lg: 'none' } }}>
           <Avatar variant="rounded" src='/static/icons/ics.svg' />
         </IconButton>
-
-        {/* <Searchbar /> */}
         <Box sx={{ flexGrow: 1 }} />
-
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-          {/* <LanguagePopover /> */}
           <NotificationsPopover />
           <AccountPopover />
         </Stack>

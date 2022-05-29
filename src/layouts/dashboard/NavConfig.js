@@ -11,10 +11,6 @@ const navConfig = [
     path: '/ics/placeList',
     icon: getIcon('eva:file-text-fill'),
   },
-  {
-    // title: 'blog',
-    path: '/ics/placeById/:id',
-  }
 ];
 
 export default navConfig;

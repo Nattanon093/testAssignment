@@ -3,7 +3,7 @@
 # Git Clone Project
 
 Open commandline or Terminal
-git clone [https://github.com/Nattanon093/testAssignment](https://github.com/Nattanon093/testAssignment)
+git clone git@github.com:Nattanon093/testAssignment.git
 
 ## Getting started
 

@@ -129,13 +129,8 @@ export default function PlaceList(props) {
           <Typography variant="h4" gutterBottom>
             Place List
           </Typography>
+            <BlogPostSearchs numSelected={selected.length} placeName={placeName} onFilterName={handleFilterByPlaceName} />
         </Stack>
-
-        <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-          <BlogPostSearchs numSelected={selected.length} placeName={placeName} onFilterName={handleFilterByPlaceName} />
-          <BlogPostsSort options={SORT_OPTIONS} />
-        </Stack>
-
         <Grid container spacing={3}
           sx={{
             display: 'flex',
@@ -149,7 +144,7 @@ export default function PlaceList(props) {
                   // height:200
                 }}
               >
-                <Card sx={{ position: 'relative', padding: '10px' }}
+                <Card sx={{ cursor: 'pointer', position: 'relative', padding: '10px' }}
                   onClick={() => placeByIdpath(place.id)}
                 >
                   <CardHeader
@@ -166,8 +161,8 @@ export default function PlaceList(props) {
                           <span>{`${place.operation_time[0].time_open} - ${place.operation_time[0].time_close}`}</span>
                         </Typography>
                         <Typography variant="body2" color="textSecondary" sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Iconify icon={'emojione:star'} width={20} height={20} sx={{ mr: 1 }} />
-                          <span>{`${place.rating}`}</span>
+                          <Iconify icon={'ion:ellipse-sharp'} width={20} height={20} sx={{ mr: 1, color: '#134B8A' }} />
+                          <span style={{ color: '#134B8A', fontSize: '16px' }}>{`${place.rating}`}</span>
                         </Typography>
                       </Stack>
                     }

@@ -89,8 +89,8 @@ export default function PlaceListByid() {
                             {place[0].name}
                           </Typography>
                           <Typography variant="body2" color="textSecondary" sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Iconify icon={'emojione:star'} width={20} height={20} sx={{ mr: 1 }} />
-                            <span>{place[0].rating}</span>
+                            <Iconify icon={'ion:ellipse-sharp'} width={20} height={20} sx={{ mr: 1, color: '#134B8A' }} />
+                            <span style={{ color: '#134B8A', fontSize: '16px' }}>{place[0].rating}</span>
                           </Typography>
                         </Stack>
                         <Stack spacing={10} direction="row" justifyContent="space-between" >
